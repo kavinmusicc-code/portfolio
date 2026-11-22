@@ -59,18 +59,27 @@
 
           <article class="site-card">
             <div class="site-preview alt-preview">
-              <span class="preview-badge">REPO BUILD</span>
+              <span class="preview-badge">PAUSED • NEED HELP</span>
             </div>
             <div class="site-body">
               <h3>Fox Defense Shield</h3>
-              <p>Python and Buildozer project configured with GitHub Actions workflows for automated Android APK builds.</p>
+              <p>Python-based security and shield build project structured around main.py and ultimate_shield.py, configured with Buildozer and GitHub Actions for Android APK packaging.</p>
               <div class="tech-row">
                 <span>Python</span>
                 <span>Buildozer</span>
                 <span>GitHub Actions</span>
+                <span>Android APK</span>
               </div>
               <div class="card-actions">
                 <a href="https://github.com/kavinmusicc-code/FoxDefenseShield" target="_blank" rel="noopener noreferrer" class="btn-primary">Repository</a>
+                <button type="button" class="btn-secondary toggle-details-btn" data-target="fox-shield-details" aria-expanded="false">
+                  Add Details
+                </button>
+              </div>
+              <div id="fox-shield-details" class="card-details" hidden>
+                <p><strong>What it does:</strong> Fox Defense Shield is being built as a defense/shield utility with Python modules and an automated Android APK build pipeline via Buildozer and GitHub Actions.</p>
+                <p><strong>Current status:</strong> Work on this project is currently paused and needs some help to move forward properly.</p>
+                <p><strong>Looking for:</strong> People who can test the build and help debug/improve it in real usage.</p>
               </div>
             </div>
           </article>
@@ -115,7 +124,7 @@
 
       <section id="connect" class="section connect-box">
         <h2>Want to See More Builds?</h2>
-        <p>Explore repositories and live frontend experiments on GitHub.</p>
+        <p>Explore repositories, help test ongoing builds, or reach out on GitHub.</p>
         <a href="https://github.com/kavinmusicc-code" target="_blank" rel="noopener noreferrer" class="btn-primary">Visit GitHub Profile</a>
       </section>
     </main>
@@ -124,5 +133,25 @@
       <p>Prashant Sagar • Website Portfolio Frontend</p>
     </footer>
   </div>
+
+  <script>
+    document.querySelectorAll(".toggle-details-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+        const panel = document.getElementById(targetId);
+        if (!panel) return;
+        const isOpen = !panel.hasAttribute("hidden");
+        if (isOpen) {
+          panel.setAttribute("hidden", "");
+          button.setAttribute("aria-expanded", "false");
+          button.textContent = "Add Details";
+        } else {
+          panel.removeAttribute("hidden");
+          button.setAttribute("aria-expanded", "true");
+          button.textContent = "Hide Details";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
