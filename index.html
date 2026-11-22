@@ -23,10 +23,10 @@
       <p class="hero-copy">
         A focused frontend portfolio highlighting web layouts, responsive interfaces, and live browser builds crafted step by step.
       </p>
-      <div class="filter-bar" aria-label="Website categories">
-        <span class="filter-pill active">All Websites</span>
-        <span class="filter-pill">Portfolios</span>
-        <span class="filter-pill">Web Interfaces</span>
+      <div class="filter-bar" role="group" aria-label="Website categories">
+        <button type="button" class="filter-pill active" data-filter="all">All Websites</button>
+        <button type="button" class="filter-pill" data-filter="portfolios">Portfolios</button>
+        <button type="button" class="filter-pill" data-filter="interfaces">Web Interfaces</button>
       </div>
     </section>
 
@@ -34,11 +34,11 @@
       <section id="websites" class="section">
         <div class="section-head">
           <h2>Websites &amp; Builds</h2>
-          <span class="meta-count">03 Listed</span>
+          <span class="meta-count" id="listed-count">03 Listed</span>
         </div>
 
         <div class="sites-grid">
-          <article class="site-card">
+          <article class="site-card" data-category="portfolios">
             <div class="site-preview">
               <span class="preview-badge">LIVE BUILD</span>
             </div>
@@ -57,7 +57,7 @@
             </div>
           </article>
 
-          <article class="site-card">
+          <article class="site-card" data-category="interfaces">
             <div class="site-preview alt-preview">
               <span class="preview-badge">PAUSED • NEED HELP</span>
             </div>
@@ -84,7 +84,7 @@
             </div>
           </article>
 
-          <article class="site-card">
+          <article class="site-card" data-category="interfaces">
             <div class="site-preview alt-preview">
               <span class="preview-badge">NEXT SLOT</span>
             </div>
@@ -149,6 +149,32 @@
           panel.removeAttribute("hidden");
           button.setAttribute("aria-expanded", "true");
           button.textContent = "Hide Details";
+        }
+      });
+    });
+
+    const filterButtons = document.querySelectorAll(".filter-pill");
+    const siteCards = document.querySelectorAll(".site-card");
+    const listedCount = document.getElementById("listed-count");
+
+    filterButtons.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const selectedFilter = pill.getAttribute("data-filter");
+
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        pill.classList.add("active");
+
+        let visibleCount = 0;
+        siteCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          const shouldShow = selectedFilter === "all" || category === selectedFilter;
+          card.hidden = !shouldShow;
+          if (shouldShow) visibleCount += 1;
+        });
+
+        if (listedCount) {
+          const formattedCount = String(visibleCount).padStart(2, "0");
+          listedCount.textContent = `${formattedCount} Listed`;
         }
       });
     });
