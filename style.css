@@ -329,3 +329,32 @@ button.btn-secondary {
     flex-wrap: wrap;
   }
 }
+
+@media (max-width: 600px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .nav a {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .sites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    flex-wrap: wrap;
+  }
+}
